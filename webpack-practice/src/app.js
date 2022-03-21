@@ -1,5 +1,5 @@
 const monkey = require("./monkey,js")
-
+require("./css/main.css")
 
 const components = ()=>{
     const h1 = document.createElement("h1");
