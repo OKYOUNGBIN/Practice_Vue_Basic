@@ -1,26 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>Hello Vue {{ username }}</h1>
+  <h1 v-text="username"></h1>
+  <p>안녕하세요 저는 {{ user.name }}</p>
+  <p>{{ user.job }}</p>
+  <p>{{ user.age }}</p>
+  <p v-html="button"></p>
+  <p v-html="button2"></p>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  data() {
+    return {
+      username: "scalper",
+      year: 2021,
+      user: {
+        name: "scalper",
+        job: "programmer",
+        age: 100,
+      },
+      button: "<button>click</button>",
+      button2: `<button onclick='alert("hacking!!!")'>click</button>`,
+    };
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
