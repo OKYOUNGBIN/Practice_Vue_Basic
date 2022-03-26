@@ -1,11 +1,8 @@
 <template>
   <div>
     <h1>Hello Vue</h1>
-    <ul>
-      <template v-for="(city, index) in cities" :key="index">
-        <li v-if="city.province === '경상도'">{{ city.name }}</li>
-      </template>
-    </ul>
+    <h2>동갑의 10명이 있다면 나이의 총 합은 {{ multiply(age, 20) }}</h2>
+    <h2>{{ getTotalScore(100) }}</h2>
   </div>
 </template>
 
@@ -14,15 +11,19 @@ export default {
   name: "App",
   data() {
     return {
-      cities: [
-        { name: "서울", province: "경기도" },
-        { name: "대전", province: "충청도" },
-        { name: "대구", province: "경상도" },
-        { name: "부산", province: "경상도" },
-        { name: "인천", province: "경기도" },
-        { name: "광주", province: "전라도" },
-      ],
+      age: 30,
     };
+  },
+  methods: {
+    add(num) {
+      return this.age + num;
+    },
+    multiply(num1, num2 = 10) {
+      return num1 * num2;
+    },
+    getTotalScore(num) {
+      return this.multiply(num, num);
+    },
   },
 };
 </script>
