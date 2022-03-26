@@ -1,16 +1,11 @@
 <template>
   <div>
     <h1>Hello Vue</h1>
-
-    <div v-for="(animal, animalIndex) in animals" :key="animalIndex">
-      <h2>Animal ===> {{ animal.name }}</h2>
-      <h3>food</h3>
-      <ul>
-        <li v-for="(food, foodIndex) in animal.food" :key="foodIndex">
-          {{ food }}
-        </li>
-      </ul>
-    </div>
+    <ul>
+      <template v-for="(city, index) in cities" :key="index">
+        <li v-if="city.province === '경상도'">{{ city.name }}</li>
+      </template>
+    </ul>
   </div>
 </template>
 
@@ -19,22 +14,13 @@ export default {
   name: "App",
   data() {
     return {
-      animals: [
-        {
-          name: "monkey",
-          size: "small",
-          food: ["banana", "apple"],
-        },
-        {
-          name: "mouse",
-          size: "big",
-          food: ["cheese", "kimchi"],
-        },
-        {
-          name: "human",
-          size: "medium",
-          food: ["rice", "bread"],
-        },
+      cities: [
+        { name: "서울", province: "경기도" },
+        { name: "대전", province: "충청도" },
+        { name: "대구", province: "경상도" },
+        { name: "부산", province: "경상도" },
+        { name: "인천", province: "경기도" },
+        { name: "광주", province: "전라도" },
       ],
     };
   },
