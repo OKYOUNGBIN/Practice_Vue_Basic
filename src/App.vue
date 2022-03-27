@@ -1,8 +1,13 @@
 <template>
   <div>
-    <h1>Hello Vue</h1>
-    <h2>동갑의 10명이 있다면 나이의 총 합은 {{ multiply(age, 20) }}</h2>
-    <h2>{{ getTotalScore(100) }}</h2>
+    <h1>Hello Vue {{ name }}</h1>
+    <button v-on:click.right="changeName">change Name</button>
+    <button v-on:mouseover="name = 'Code Scalper'">change Name</button>
+    <button v-on:mouseleave="name = 'scalper'">change Name</button>
+    <a v-on:click.prevent="movePage" href="https://naver.com">naver로 이동</a>
+    <h2>{{ number }}</h2>
+    <button v-on:click="increment(1)">숫자 1증가</button>
+    <button v-on:click="decrement(1)">숫자 1감소</button>
   </div>
 </template>
 
@@ -11,21 +16,37 @@ export default {
   name: "App",
   data() {
     return {
-      age: 30,
+      name: "scapler",
+      number: 0,
     };
   },
   methods: {
-    add(num) {
-      return this.age + num;
+    changeName() {
+      this.name = "Code Scalper";
     },
-    multiply(num1, num2 = 10) {
-      return num1 * num2;
+    movePage(event) {
+      //
+      event.preventDefault();
+      const check = confirm("페이지를 이동하시겠습니까?");
+      if (check) {
+        console.log("page이동");
+      } else {
+        console.log("페이지 이동 X");
+      }
     },
-    getTotalScore(num) {
-      return this.multiply(num, num);
+    increment(num) {
+      this.number += num;
+    },
+    decrement(num) {
+      this.number -= num;
     },
   },
 };
 </script>
 
-<style></style>
+<style>
+a {
+  font-size: 24px;
+  display: block;
+}
+</style>
