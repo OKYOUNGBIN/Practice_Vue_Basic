@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1 v-focus>Directives</h1>
-    <h2>유저의 이름은 {{ userName }}</h2>
-    <button @click="changeName">change name</button>
-    <h2 v-pre>{{ userName }}</h2>
-    <input v-focus type="text" />
-    highlight => <input type="text" v-highlight />
+    <h2>{{ address }}</h2>
+    <h2>내가 받은 점수의 합 {{ grade.math + grade.kor + grade.sci }}</h2>
+    <h2>내가 받은 점수의 합 (computed) {{ totalScore }}</h2>
+    <h2>내가 받은 점수의 합 (methods) {{ getTotalScore() }}</h2>
+    영어점수 <input type="number" v-model="grade.eng" /> <br />
+    학생이름<input type="text" v-model="studenName" />
   </div>
 </template>
 
@@ -15,28 +15,34 @@ export default {
   data() {
     return {
       userName: "scalper",
+      address1: "성남시",
+      address2: "분당구",
+      address3: "정자로",
+      grade: {
+        math: 70,
+        kor: 90,
+        eng: 50,
+        sci: 55,
+      },
+      studenName: "",
     };
   },
-  directives: {
-    focus: {
-      mounted(el) {
-        el.focus();
-      },
+  computed: {
+    address() {
+      return `${this.address1}${this.address2}${this.address3}`;
     },
-    highlight: {
-      mounted(el) {
-        console.log({ el });
-        el.oninput = () => {
-          el.style.background = "salmon";
-          el.style.color = "#fff";
-        };
-      },
+    totalScore() {
+      console.log("computed");
+      const { math, kor, eng, sci } = this.grade;
+      return math + kor + eng + sci;
     },
   },
+  directives: {},
   methods: {
-    changeName() {
-      console.log("name change!!!");
-      this.userName = "code";
+    getTotalScore() {
+      console.log("methods");
+      const { math, kor, eng, sci } = this.grade;
+      return math + kor + eng + sci;
     },
   },
 };
