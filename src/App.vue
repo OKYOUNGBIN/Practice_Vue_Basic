@@ -1,11 +1,14 @@
 <template>
   <div>
-    <h2>{{ address }}</h2>
-    <h2>내가 받은 점수의 합 {{ grade.math + grade.kor + grade.sci }}</h2>
-    <h2>내가 받은 점수의 합 (computed) {{ totalScore }}</h2>
-    <h2>내가 받은 점수의 합 (methods) {{ getTotalScore() }}</h2>
-    영어점수 <input type="number" v-model="grade.eng" /> <br />
-    학생이름<input type="text" v-model="studenName" />
+    <h2>Current Money :: {{ money }}</h2>
+    <div>
+      <button @click="money += 100">earn money</button>
+      <button @click="money -= 100">spend money</button>
+    </div>
+    <h3>{{ receit }}</h3>
+    <button @click="receit.food += 500">buy food</button>
+    <hr />
+    <input type="text" v-model="userName" />
   </div>
 </template>
 
@@ -15,36 +18,43 @@ export default {
   data() {
     return {
       userName: "scalper",
-      address1: "성남시",
-      address2: "분당구",
-      address3: "정자로",
-      grade: {
-        math: 70,
-        kor: 90,
-        eng: 50,
-        sci: 55,
+      money: 0,
+      receit: {
+        food: 3000,
+        fee: 2000,
+        fare: 10000,
       },
-      studenName: "",
     };
   },
-  computed: {
-    address() {
-      return `${this.address1}${this.address2}${this.address3}`;
+  computed: {},
+  watch: {
+    userName: {
+      handler(newValue) {
+        console.log(newValue, "newValue");
+      },
+      immediate: true,
     },
-    totalScore() {
-      console.log("computed");
-      const { math, kor, eng, sci } = this.grade;
-      return math + kor + eng + sci;
+    // receit(newValue, oldValue) {
+    //   console.log("영수증에 값 변화가 있음", newValue, oldValue);
+    // },
+    receit: {
+      handler(newValue) {
+        console.log("영수증에 값 변화", newValue);
+      },
+      deep: true,
+    },
+    money(newValue, oldValue) {
+      console.log(oldValue);
+      if (newValue > 2000 && newValue > oldValue) {
+        console.log("mission complete");
+      }
+      if (oldValue < 1500 && newValue < oldValue) {
+        console.log("save money");
+      }
     },
   },
   directives: {},
-  methods: {
-    getTotalScore() {
-      console.log("methods");
-      const { math, kor, eng, sci } = this.grade;
-      return math + kor + eng + sci;
-    },
-  },
+  methods: {},
 };
 </script>
 
