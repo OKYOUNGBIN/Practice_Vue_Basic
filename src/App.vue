@@ -1,32 +1,29 @@
 <template>
   <div>
-    <h2>Hello Component</h2>
-    <button @click="activeTab = 'Menu1'">Menu1</button>
-    <button @click="activeTab = 'Menu2'">Menu2</button>
-    <button @click="activeTab = 'Menu3'">Menu3</button>
-    <keep-alive>
-      <component :is="activeTab"></component>
-    </keep-alive>
+    <h2>Hello slots</h2>
+    <CardView>
+      <template v-slot:header>
+        <h3>Random Image</h3>
+      </template>
+      <template v-slot:default>
+        <img src="https://placeimg.com/200/100/any" alt="" />
+      </template>
+      <template v-slot:footer>
+        <small>thank you</small>
+      </template>
+    </CardView>
   </div>
 </template>
 
 <script>
-import Menu1 from "./components/tabItems/Menu1.vue";
-import Menu2 from "./components/tabItems/Menu2.vue";
-import Menu3 from "./components/tabItems/Menu3.vue";
+import CardView from "./components/slot/CardView.vue";
 export default {
   name: "App",
-  components: { Menu1, Menu2, Menu3 },
-  data() {
-    return {
-      username: "scapler",
-      activeTab: "Menu1",
-    };
+  components: {
+    CardView,
   },
-  provide() {
-    return {
-      name: this.username,
-    };
+  data() {
+    return {};
   },
   computed: {},
   watch: {},
