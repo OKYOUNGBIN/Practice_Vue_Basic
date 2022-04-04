@@ -1,29 +1,26 @@
 <template>
   <div>
-    <h2>Hello slots</h2>
-    <CardView>
-      <template v-slot:header>
-        <h3>Random Image</h3>
-      </template>
-      <template v-slot:default>
-        <img src="https://placeimg.com/200/100/any" alt="" />
-      </template>
-      <template v-slot:footer>
-        <small>thank you</small>
-      </template>
-    </CardView>
+    <h2>Hello Teloport</h2>
+    <teleport to="#extra-modal" :disabled="isTeloport">
+      <div class="modal">
+        this is modal!
+        <button @click="isTeloport = !isTeloport">teleport toggle</button>
+      </div>
+    </teleport>
+    <teleport to="#extra-modal">
+      <div class="modal2">this is modal2</div>
+    </teleport>
   </div>
 </template>
 
 <script>
-import CardView from "./components/slot/CardView.vue";
 export default {
   name: "App",
-  components: {
-    CardView,
-  },
+  components: {},
   data() {
-    return {};
+    return {
+      isTeloport: true,
+    };
   },
   computed: {},
   watch: {},
@@ -32,4 +29,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.modal {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  font-size: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
