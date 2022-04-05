@@ -1,6 +1,9 @@
 <template>
   <h3>Parent Component</h3>
-  <ChildComp v-if="showChild" />
+  <input v-model="nickname" ref="inputRef" />
+  <button @click="consoleRef">Console Ref</button>
+  <hr />
+  <ChildComp v-if="showChild" ref="childComp" />
   <button @click="showChild = false">unmount child</button>
 </template>
 
@@ -11,7 +14,15 @@ export default {
   data() {
     return {
       showChild: true,
+      nickname: "",
     };
+  },
+  methods: {
+    consoleRef() {
+      console.log(this.$refs.inputRef, "input ref");
+      console.log(this.$refs.childComp, "child ref");
+      this.$refs.childComp.sayHello();
+    },
   },
   components: {
     ChildComp,
@@ -29,10 +40,10 @@ export default {
     console.log("parent mounted");
   },
   beforeUpdate() {
-    console.log("parent beforeUpdate");
+    //console.log("parent beforeUpdate");
   },
   updated() {
-    console.log("parent updated");
+    //console.log("parent updated");
   },
   beforeUnmount() {
     console.log("parent beforeUnmount");
