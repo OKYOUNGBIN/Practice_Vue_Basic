@@ -1,32 +1,38 @@
 <template>
-  <h2>Handsome?{{ isHandsome }}</h2>
-  <h3>{{ name }}</h3>
+  <h2>{{ username }}</h2>
+  <button @click="changeName">ChangeUserName</button>
+  <h2>제품명 : {{ name }}, 가격 {{ price }}</h2>
+  <button @click="changeProduct">제품바꾸기</button>
+  <div>
+    <input type="text" v-model="username" />
+  </div>
 </template>
 
 <script>
-import { reactive, ref, toRefs } from "vue";
-//import { reactive, toRefs } from "vue";
+import { reactive, toRefs, ref } from "vue";
 export default {
   name: "TestComponet",
   setup() {
-    let isHandsome = ref(false);
-    const state = reactive({
-      name: "scalper",
-      age: 50,
-      job: "programmer",
-    });
+    const username = ref("scalper");
 
+    function changeName() {
+      username.value = "Messi";
+    }
+    const state = reactive({
+      name: "TV",
+      price: 100,
+    });
+    function changeProduct() {
+      state.name = "세탁기";
+      state.price = 5000;
+    }
     return {
-      isHandsome,
+      username,
+      changeName,
+      changeProduct,
       ...toRefs(state),
     };
   },
-
-  //   data() {
-  //     return {
-  //       username: "scalper",
-  //     };
-  //   },
 };
 </script>
 
