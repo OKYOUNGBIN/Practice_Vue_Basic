@@ -1,81 +1,36 @@
 <template>
-  <h2>{{ username }}</h2>
-  <hr />
-  <div>
-    price <input type="number" v-model="price" /> amount
-    <input type="number" v-model="amount" />
-    <h3>Total Price :: {{ totalPrice }}</h3>
-  </div>
-  <hr />
-  <div>
-    first <input type="text" v-model="home.city" /> last
-    <input type="text" v-model="last" />
-    <h3>Full name :: {{ fullName }}</h3>
-  </div>
+  <h2>hello LifeCycle</h2>
+  <ChildComponent
+    firstname="Code"
+    lastname="scalper"
+    @sendParent="sendParent"
+  />
 </template>
 
 <script>
-import { reactive, toRefs, ref, computed, watch } from "vue";
+import ChildComponent from "./ChildComponent.vue";
+import {} from "vue";
 export default {
   name: "TestComponet",
-  setup() {
-    const username = ref("scalper");
-    const price = ref(5000);
-    const amount = ref(1);
-
-    const totalPrice = computed(() => {
-      return price.value + amount.value;
-    });
-    const state = reactive({
-      first: "오우",
-      last: "ㅗㅑ",
-      home: {
-        city: "Seoul",
-        type: "Apartment",
-      },
-    });
-    watch(price, (newValue, oldValue) => {
-      console.log(newValue, oldValue);
-    });
-    const fullName = computed(function () {
-      return `${state.first} ${state.last}`;
-    });
-    watch(
-      () => {
-        return state.first;
-      },
-      (newValue, oldValue) => {
-        console.log(newValue.first, oldValue.first);
-      }
-    );
-    watch(
-      () => {
-        return { ...state.home };
-      },
-      (newValue, oldValue) => {
-        console.log(newValue, oldValue);
-      },
-      { deep: true }
-    );
-    return {
-      username,
-      price,
-      amount,
-      totalPrice,
-      ...toRefs(state),
-      fullName,
-    };
+  components: { ChildComponent },
+  methods: {
+    sendParent() {
+      console.log("Parent");
+    },
   },
-  // data() {
+  // setup() {
+  //   const inputRef = ref(null);
+  //   const username = ref("scalper");
+
+  //   onMounted(() => {
+  //     inputRef.value.focus();
+  //     console.log("onMounted");
+  //   });
+
   //   return {
-  //     price: 5000,
-  //     amount: 1,
+  //     username,
+  //     inputRef,
   //   };
-  // },
-  // computed: {
-  //   totalPrice() {
-  //     return this.price * this.amount;
-  //   },
   // },
 };
 </script>
