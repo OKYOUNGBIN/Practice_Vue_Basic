@@ -1,37 +1,21 @@
 <template>
-  <h2>hello LifeCycle</h2>
-  <ChildComponent
-    firstname="Code"
-    lastname="scalper"
-    @sendParent="sendParent"
-  />
+  <h2>hello Reusability</h2>
+  <hr />
+  <ProductStatus />
+  <hr />
+  <FeeStatus />
+  <hr />
+  <SavingStatus />
 </template>
 
 <script>
-import ChildComponent from "./ChildComponent.vue";
+import FeeStatus from "../mixin/FeeStatus.vue";
+import ProductStatus from "../mixin/ProductStatus.vue";
+import SavingStatus from "../mixin/SavingStatus.vue";
 import {} from "vue";
 export default {
   name: "TestComponet",
-  components: { ChildComponent },
-  methods: {
-    sendParent() {
-      console.log("Parent");
-    },
-  },
-  // setup() {
-  //   const inputRef = ref(null);
-  //   const username = ref("scalper");
-
-  //   onMounted(() => {
-  //     inputRef.value.focus();
-  //     console.log("onMounted");
-  //   });
-
-  //   return {
-  //     username,
-  //     inputRef,
-  //   };
-  // },
+  components: { SavingStatus, ProductStatus, FeeStatus },
 };
 </script>
 
